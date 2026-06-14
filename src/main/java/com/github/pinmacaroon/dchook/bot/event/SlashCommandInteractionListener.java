@@ -27,6 +27,17 @@ public class SlashCommandInteractionListener extends ListenerAdapter {
             case "allowplayer" -> AllowCommand.run(event);
             case "stat" -> StatCommand.run(event);
             case "about" -> AboutCommand.run(event);
+						case "whitelist" -> {
+							switch (event.getSubcommandName()) {
+								case "add" -> WhitelistCommands.add(event);
+								case "remove" -> WhitelistCommands.remove(event);
+								case "list" -> WhitelistCommands.list(event);
+								case "reload" -> WhitelistCommands.reload(event);
+							
+								default -> event.reply("subcommand not found").setEphemeral(true)
+											.queue();
+							}
+						}
             default -> event.reply("""
                             An internal error occurred! Please send a bug report: \
                             <https://github.com/pinmacaroon/hook/issues>""").setEphemeral(true)

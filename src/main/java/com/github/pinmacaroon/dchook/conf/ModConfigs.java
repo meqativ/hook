@@ -17,6 +17,12 @@ public class ModConfigs {
     public static String MESSAGES_BOT_LIST;
     public static String MESSAGES_BOT_MODS_LIST;
     public static String MESSAGES_BOT_MODS_NONE;
+		public static String MESSAGES_BOT_WHITELIST_LIST;
+		public static String MESSAGES_BOT_WHITELIST_RELOADED;
+		public static String MESSAGES_BOT_WHITELIST_ADD_SUCCESS;
+		public static String MESSAGES_BOT_WHITELIST_ADD_FAIL;
+		public static String MESSAGES_BOT_WHITELIST_REMOVE_SUCCESS;
+		public static String MESSAGES_BOT_WHITELIST_REMOVE_FAIL;
     public static boolean IS_THREAD;
     public static boolean FUNCTIONS_ALLOWOOCMESSAGES;
     public static String FUNCTIONS_MOD_BACKLOG;
@@ -78,6 +84,14 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("messages.bot.list", "There are currently **{0}**/{1} players online: "), "the list command preamble message\n# {0}: online players\n# {1}: max players");
         configs.addKeyValuePair(new Pair<>("messages.bot.mods.list", "The server currently has {0} required mods: "), "the mods command preamble message\n# {0}: number of mods");
         configs.addKeyValuePair(new Pair<>("messages.bot.mods.none", "The server currently has no required mods, you can join with a vanilla client!"), "the mods command message when no mods are needed by the client");
+
+				configs.addKeyValuePair(new Pair<>("messages.whitelist.list", "Whitelisted players: "), "whitelist list message");
+				configs.addKeyValuePair(new Pair<>("messages.whitelist.reloaded", "Reloading whitelist..."), "whitelist reloaded message");
+				configs.addKeyValuePair(new Pair<>("messages.whitelist.add.success", "Added **{0}** to the whitelist!"), "user was added to the whitelist\n# {0}: player name");
+				configs.addKeyValuePair(new Pair<>("messages.whitelist.add.fail", "**{0}** is already in the whitelist."), "user is already in the whitelist\n# {0}: player name");
+				configs.addKeyValuePair(new Pair<>("messages.whitelist.remove.success", "Removed **{0}** from the whitelist!"), "user is removed from the whitelist message\n# {0}: player name");
+				configs.addKeyValuePair(new Pair<>("messages.whitelist.remove.fail", "**{0}** is not in the whitelist."), "user is already not in the whitelist message\n# {0}: player name");
+				
         configs.addDocumentationLine("note: the time command cannot be customised yet because im lazy :3");
 
         configs.addBlankLine();
@@ -99,6 +113,13 @@ public class ModConfigs {
         FUNCTIONS_ALLOWOOCMESSAGES = CONFIG.getOrDefault("functions.allow_ooc_messages", false);
         FUNCTIONS_MOD_BACKLOG = CONFIG.getOrDefault("functions.mod_backlog_channel_or_thread", "");
 
+				MESSAGES_BOT_WHITELIST_LIST = CONFIG.getOrDefault("messages.whitelist.list", "messages.whitelist.list");
+				MESSAGES_BOT_WHITELIST_RELOADED = CONFIG.getOrDefault("messages.whitelist.reloaded", "messages.whitelist.reloaded");
+				MESSAGES_BOT_WHITELIST_ADD_SUCCESS = CONFIG.getOrDefault("messages.whitelist.add.success", "messages.whitelist.add.success");
+				MESSAGES_BOT_WHITELIST_ADD_FAIL = CONFIG.getOrDefault("messages.whitelist.add.fail", "messages.whitelist.add.fail");
+				MESSAGES_BOT_WHITELIST_REMOVE_SUCCESS = CONFIG.getOrDefault("messages.whitelist.remove.success", "messages.whitelist.remove.success");
+				MESSAGES_BOT_WHITELIST_REMOVE_FAIL = CONFIG.getOrDefault("messages.whitelist.remove.fail", "messages.whitelist.remove.fail");
+				
         MESSAGES_SERVER_STARTING_ALLOWED = CONFIG.getOrDefault("messages.server.starting.allowed", false);
         MESSAGES_SERVER_STARTED_ALLOWED = CONFIG.getOrDefault("messages.server.started.allowed", false);
         MESSAGES_SERVER_STOPPED_ALLOWED = CONFIG.getOrDefault("messages.server.stopped.allowed", false);

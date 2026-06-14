@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 
@@ -42,6 +43,23 @@ public class Bot {
                 "over this server (literally 1984)"));
 
         CommandListUpdateAction commands = this.JDA.updateCommands().addCommands(
+								Commands.slash("whitelist", "Whitelist management commands")
+												.addSubcommands(
+													new SubcommandData("add", "Adds a user to the whitelist")
+														.addOptions(new OptionData(
+																						OptionType.STRING, "username", "Who to add (minecraft username)"
+																		).setRequired(true)
+														),
+													new SubcommandData("remove", "Removes a user from the whitelist")
+														.addOptions(new OptionData(
+																						OptionType.STRING, "username", "Who to remove (minecraft username)"
+																		).setRequired(true)
+														),
+													new SubcommandData("list", "Lists all users in the whitelist"),
+													new SubcommandData("reload", "Reloads the whitelist from file")
+												)
+												.setContexts(InteractionContextType.GUILD)
+												.setIntegrationTypes(IntegrationType.GUILD_INSTALL),
                 Commands.slash("time", "Check time and weather in the overworld")
                         .addOptions(new OptionData(
                                         OptionType.BOOLEAN, "ephemeral", "Should the message be only visible to you?"
@@ -88,7 +106,13 @@ public class Bot {
                         .setDefaultPermissions(DefaultMemberPermissions.DISABLED)
         );
 
-        commands.queue();
+        commands.queue(
+					success->{},
+					error -> {
+						System.err.println("Discord rejected the slash commands:");
+						error.printStackTrace();
+					}
+				);
     }
 
     public JDA getJDA() {
